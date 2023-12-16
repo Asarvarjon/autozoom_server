@@ -1,5 +1,5 @@
 import { ICreateCar } from './../interface/cars.interface';
-import { IsNotEmpty, IsString, IsUUID, IsNumber, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsString, IsUUID,   IsOptional } from 'class-validator';
  
 
 export class CreateCarDTO implements ICreateCar {
@@ -32,12 +32,12 @@ export class CreateCarDTO implements ICreateCar {
     max_speed: string;
 
     @IsNotEmpty()
-    @IsNumber()
+    @IsString()
     max_people: number;
 
     @IsNotEmpty()
     @IsString()
-    tranmission: string;
+    transmission: string;
 
     @IsNotEmpty()
     @IsString()
@@ -50,30 +50,35 @@ export class CreateCarDTO implements ICreateCar {
     @IsNotEmpty()
     @IsString()
     petrol: string;
+ 
 
     @IsNotEmpty()
-    @IsNumber()
-    limitPerDay: number;
+    @IsString()
+    limitperday: number;
 
     @IsNotEmpty()
-    @IsNumber()
+    @IsString()
     deposit: number;
 
     @IsNotEmpty()
-    @IsNumber()
+    @IsString()
     premium_protection: number;
 
     @IsNotEmpty()
     @IsString()
-    price_in_AED: string;
+    price_in_aed: string;
 
     @IsNotEmpty()
     @IsString()
-    price_in_USD: string;
+    price_in_usd: string;
 
     @IsNotEmpty()
     @IsUUID()
     location_id: string;
+
+    @IsNotEmpty()
+    @IsUUID()
+    category_id: string;
 }
 
 export class UpdateCarDTO implements ICreateCar {
@@ -87,22 +92,23 @@ export class UpdateCarDTO implements ICreateCar {
     city_id: string;
 
     @IsString()
+    seconds: string
+
+    @IsString()
     color: string;
 
     @IsString()
     year: string;
-
-    @IsString()
-    seconds: string;
+ 
 
     @IsString()
     max_speed: string;
 
-    @IsNumber()
+    @IsString()
     max_people: number;
 
     @IsString()
-    tranmission: string;
+    transmission: string;
 
     @IsString()
     motor: string;
@@ -113,21 +119,24 @@ export class UpdateCarDTO implements ICreateCar {
     @IsString()
     petrol: string;
 
-    @IsNumber()
-    limitPerDay: number;
+    @IsString()
+    limitperday: number;
 
-    @IsNumber()
+    @IsString()
     deposit: number;
 
-    @IsNumber()
+    @IsString()
     premium_protection: number;
 
     @IsString()
-    price_in_AED: string;
+    price_in_aed: string;
 
     @IsString()
-    price_in_USD: string;
+    price_in_usd: string;
 
     @IsUUID()
     location_id: string;
+
+    @IsUUID()
+    category_id: string;
 }

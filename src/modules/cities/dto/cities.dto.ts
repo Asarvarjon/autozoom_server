@@ -7,10 +7,12 @@ export class CreateCityDTO implements ICreateCity {
     @MaxLength(1024)
     name: string;
 
+  
+
     @IsNotEmpty()
     @IsString()
     @MaxLength(1024)
-    slug: string;
+    text: string;
 }
 
 
@@ -19,7 +21,8 @@ export class UpdateCityDTO implements ICreateCity {
     @MaxLength(1024)
     name: string;
 
+ 
     @IsString()
     @MaxLength(1024)
-    slug: string;
+    text: string;
 }

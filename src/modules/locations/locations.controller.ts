@@ -11,7 +11,7 @@ export default class LocationsController {
     public create = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const modelData: CreateLocationDTO = req.body;
-            const data = await this.locationsService.create(modelData );
+            const data = await this.locationsService.create(modelData, req['files']);
 
             res.status(201).json({
                 success: true,
@@ -80,7 +80,7 @@ export default class LocationsController {
             const modelData: UpdateLocationDTO = req.body;
             const { id } = req.params;
 
-            const data = await this.locationsService.update(id, modelData );
+            const data = await this.locationsService.update(id, modelData,  req['files'] );
 
             res.status(200).json({
                 success: true,

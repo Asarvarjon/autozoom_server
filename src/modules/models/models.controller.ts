@@ -42,7 +42,7 @@ export default class ModelsController {
             const { query } = req;
             const { keyword }: ISearchQuery = query;
             const filters = extractQuery(query).filters;
-            const sorts = extractQuery(query).sorts;
+            const sorts = extractQuery(query).sorts; 
 
             const data = await this.modelsService.getAll(keyword, filters, sorts);
 

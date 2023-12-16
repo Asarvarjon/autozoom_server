@@ -21,8 +21,7 @@ export default class ModelRoute implements Routes {
 
         this.router.post(
             `${this.path}/`,
-            protect,
-            validateFiles('images'),
+            protect, 
             validate(CreateModelDTO, 'body', true),
             this.modelsController.create  
         );

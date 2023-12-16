@@ -23,6 +23,7 @@ export default class ModelsDao {
     }
 
     async getAll(keyword: string = '', filters: any, sorts: any) {
+        console.log(filters);
         const { limit, offset, order, orderBy } = sorts;
         return await KnexService('models')
             .select('*')

@@ -7,10 +7,12 @@ export class CreateLocationDTO implements ICreateLocation {
     @MaxLength(1024)
     name: string;
 
+    
+
     @IsNotEmpty()
     @IsString()
     @MaxLength(1024)
-    slug: string;
+    text: string;
 }
 
 
@@ -19,7 +21,9 @@ export class UpdateLocationDTO implements ICreateLocation {
     @MaxLength(1024)
     name: string;
 
+    
+ 
     @IsString()
     @MaxLength(1024)
-    slug: string;
+    text: string;
 }

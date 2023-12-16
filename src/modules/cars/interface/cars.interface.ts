@@ -8,15 +8,16 @@ export interface ICar {
     seconds: string;
     max_speed: string;
     max_people: number;
-    tranmission: string;
+    transmission: string;
     motor: string;
     drive_side: string;
     petrol: string;
-    limitPerDay: number;
+    limitperday: number;
     deposit: number;
     premium_protection: number;
-    price_in_AED: string;
-    price_in_USD: string;
+    price_in_aed: string;
+    price_in_usd: string;
+    category_id: string; 
     location_id: string;
     created_at: string; // Assuming created_at is a timestamp represented as a string
 }
@@ -24,21 +25,22 @@ export interface ICar {
 export interface ICreateCar { 
     brand_id: string;
     model_id: string;
+    category_id: string;
     city_id: string;
     color?: string;
     year: string;
     seconds: string;
     max_speed: string;
     max_people: number;
-    tranmission: string;
+    transmission: string;
     motor: string;
     drive_side: string;
     petrol: string;
-    limitPerDay: number;
+    limitperday: number;
     deposit: number;
     premium_protection: number;
-    price_in_AED: string;
-    price_in_USD: string;
+    price_in_aed: string;
+    price_in_usd: string;
     location_id: string;  
 }
 

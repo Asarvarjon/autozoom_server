@@ -3,6 +3,7 @@ import { ISearchQuery, IDefaultQuery } from '../shared/interface/query.interface
 import { Request, Response, NextFunction } from 'express';  
 import extractQuery from '../shared/utils/extractQuery';  
 import Service from './cars.service';
+import flat from "flat";
 
 export default class CarsController {
     private service = new Service() 
@@ -27,9 +28,12 @@ export default class CarsController {
             const { id } = req.params 
             const data = await this.service.findOne(id)
 
+            let result = flat.unflatten(data)
+
+
             res.status(200).json({
                 success: true,
-                data
+                data: result
             })
 
         } catch (error) {
@@ -46,9 +50,14 @@ export default class CarsController {
 
             const data = await this.service.getAll(keyword, filters, sorts);
 
+            const result = []
+            for (const model of data) {
+              result.push(flat.unflatten(model))
+            }
+
             res.status(200).json({
                 success: true,
-                data
+                data: result
             })
         } catch (error) {
             next(error)

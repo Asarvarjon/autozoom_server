@@ -13,16 +13,17 @@ export async function up(knex: Knex): Promise<void> {
         seconds varchar not null,
         max_speed varchar not null,
         max_people int not null,
-        tranmission varchar not null,
+        transmission varchar not null,
         motor varchar not null,
         drive_side varchar not null,
         petrol varchar not null,
-        limitPerDay int not null,
+        limitperday int not null,
         deposit int not null,
         premium_protection int not null,
-        price_in_AED varchar not null,
-        price_in_USD varchar not null,
-        location_id uuid references locations (id) not null,  
+        price_in_aed varchar not null,
+        price_in_usd varchar not null,
+        location_id uuid references locations (id) not null, 
+        category_id uuid references categories (id) not null,  
         created_at timestamp not null default current_timestamp
     );
 `)

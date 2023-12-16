@@ -9,7 +9,7 @@ export const pg = {
   port: env.PG_PORT || 5432,
   user: env.PG_USER || 'postgres',
   password: env.PG_PASSWORD || 'pgpwd',
-  database: env.PG_DB_NAME || 'oits',
+  database: env.PG_DB_NAME || 'autozoom',
   migrationsTable: env.PG_MIGRATIONS_TABLE || 'migrations',
   maxPool: 75,
   minPool: 2,
@@ -29,8 +29,8 @@ export const server = {
 };  
 
 export const Admin = {
-   phone_number: env.PHONE_NUMBER || '931704448',
-   password: env.PASSWORD || 'oits_admin'
+   phone_number: env.PHONE_NUMBER || '900474227',
+   password: env.PASSWORD || 'superadmin'
 }; 
 
 
