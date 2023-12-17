@@ -37,6 +37,32 @@ class AuthController {
     }
   };
 
+  public getme = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const userData: SigninDTO = req.body;
+
+      const remoteIp = requestIp.getClientIp(req);
+      const device = req.headers['user-agent'];
+
+      const data = await this.authService.signIn({ phone_number: userData.phone_number, password: userData.password }, device, remoteIp);  
+
+        res.status(200).json({ success: true, data, message: `Login success` });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public getMe = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const user = req['user']
+      
+
+      res.status(200).json({ success: true, data: user, message: 'Current user' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
 }
 
 export default AuthController;
