@@ -31,7 +31,7 @@ export default class ModelsDao {
                 "brands.id as brand.id",
                 "brands.title as brand_title",
             ])
-            .leftJoin('models', 'cars.model_id', 'models.id') 
+            .leftJoin('brands', 'models.brand_id', 'brands.id') 
             .groupBy('models.id','brands.id')
             .where(filters)
             
@@ -46,7 +46,7 @@ export default class ModelsDao {
                     "brands.id as brand.id",
                     "brands.title as brand_title",
                 ])
-                .leftJoin('models', 'cars.model_id', 'models.id') 
+                .leftJoin('brands', 'models.brand_id', 'brands.id') 
                 .groupBy('models.id','brands.id')
                 .where({ id: modelId })
         );
