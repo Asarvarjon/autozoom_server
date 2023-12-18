@@ -171,7 +171,7 @@ export default class CarsDao {
             const { category, ...carData } = item;
           
             // Check if the category is already in the result
-            const existingCategory = result.find((group) => group.category.id === category.id);
+            const existingCategory = result.find((group) => group.category && group.category.id === category.id);
           
             if (existingCategory) {
               // If the category exists, add the car data to its 'cars' array
