@@ -48,7 +48,7 @@ export default class ModelsDao {
                 ])
                 .leftJoin('brands', 'models.brand_id', 'brands.id') 
                 .groupBy('models.id','brands.id')
-                .where({ id: modelId })
+                .where({ 'models.id': modelId })
         );
     }
 
