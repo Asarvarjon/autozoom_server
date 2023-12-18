@@ -64,6 +64,26 @@ export default class CarsController {
         }
     }
 
+    public getGroupedByCategory = async(req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const { query } = req; 
+            const data = await this.service.groupedByCategory();
+
+            const result = []
+            for (const model of data) {
+              result.push(flat.unflatten(model))
+            }
+
+            res.status(200).json({
+                success: true,
+                data: result
+            })
+        } catch (error) {
+            next(error)
+        }
+    }
+
+
     public delete = async (req: Request, res: Response, next: NextFunction)=> {
         try {
 

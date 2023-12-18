@@ -52,6 +52,12 @@ export default class Service {
         return data
     }
 
+    async groupedByCategory() {
+        const data = await this.dao.groupedByCategory( );
+
+        return data
+    }
+
     async delete(id: string) {
         await this.dao.deleteBlogImages(id)
         await this.dao.deleteById(id)
