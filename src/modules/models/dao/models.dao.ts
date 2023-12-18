@@ -26,14 +26,28 @@ export default class ModelsDao {
         console.log(filters);
         const { limit, offset, order, orderBy } = sorts;
         return await KnexService('models')
-            .select('*')
+            .select([
+                'models.*',
+                "brands.id as brand.id",
+                "brands.title as brand_title",
+            ])
+            .leftJoin('models', 'cars.model_id', 'models.id') 
+            .groupBy('models.id','brands.id')
             .where(filters)
+            
             .orderBy(orderBy, order) 
     }
 
     async getById(modelId: string) {
         return getFirst(
             await KnexService('models')
+                .select([
+                    'models.*',
+                    "brands.id as brand.id",
+                    "brands.title as brand_title",
+                ])
+                .leftJoin('models', 'cars.model_id', 'models.id') 
+                .groupBy('models.id','brands.id')
                 .where({ id: modelId })
         );
     }
