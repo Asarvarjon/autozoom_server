@@ -17,6 +17,8 @@ export interface ICar {
     premium_protection: number;
     price_in_aed: string;
     price_in_usd: string;
+    price_in_aed_sale: string;
+    price_in_usd_sale: string;
     category_id: string; 
     location_id: string;
     created_at: string; // Assuming created_at is a timestamp represented as a string
@@ -42,5 +44,7 @@ export interface ICreateCar {
     price_in_aed: string;
     price_in_usd: string;
     location_id: string;  
+    price_in_aed_sale: string;
+    price_in_usd_sale: string;
 }
 

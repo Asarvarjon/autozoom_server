@@ -41,6 +41,9 @@ export default class CarsDao {
             .select([
                 "cars.*",
                 KnexService.raw(`jsonb_agg(distinct car_images) as car_images`),
+                KnexService.raw("price_in_aed::numeric * 3 as three_days_price"),
+                KnexService.raw("price_in_aed::numeric * 2 as two_days_price"),
+                KnexService.raw("price_in_aed::numeric * 4 as four_days_price"),
                 "cities.name as city.name",
                 "cities.id as city.id",
                 "cities.slug as city.slug",
@@ -81,9 +84,39 @@ export default class CarsDao {
         await this.filterById(query, 'cars.category_id', filters.category_id);
         await this.filterById(query, 'cars.brand_id', filters.brand_id);
         await this.filterById(query, 'cars.model_id', filters.model_id);
+
+       
+        if (filters.three_days_price) {
+            console.log(filters.three_days_price)
+            await query.whereRaw('price_in_aed::numeric * 3 <= ?', [filters.three_days_price]);
+        }
+    
+        if (filters.two_days_price) {
+            await query.whereRaw('price_in_aed::numeric * 2 <= ?', [filters.two_days_price]);
+        }
+
+        if (filters.four_days_price) {
+            await query.whereRaw('price_in_aed::numeric * 4 <= ?', [filters.four_days_price]);
+        }
+
+        if (filters.deposit !== undefined) {
+            await query.where('cars.deposit', filters.deposit);
+        }
+
+        if (filters.all_inclusive) { 
+            await query.whereBetween('cars.price_in_aed', [4000, 5000]);
+        }
+
+        if (filters.rent_ferrari) {
+            await query.where('brands.title', 'ilike', 'Ferrari');
+        }
+    
+    
     
         return await query.orderBy(orderBy, order).offset(offset).limit(limit);
     }
+
+    
     
 
     async getById(id: string) {

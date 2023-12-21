@@ -68,6 +68,13 @@ export class CreateCarDTO implements ICreateCar {
     @IsString()
     price_in_aed: string;
 
+     
+    @IsString()
+    price_in_aed_sale: string;
+
+    @IsString()
+    price_in_usd_sale: string;
+
     @IsNotEmpty()
     @IsString()
     price_in_usd: string;
@@ -90,6 +97,12 @@ export class UpdateCarDTO implements ICreateCar {
 
     @IsUUID()
     city_id: string;
+
+    @IsString()
+    price_in_aed_sale: string;
+
+    @IsString()
+    price_in_usd_sale: string;
 
     @IsString()
     seconds: string
