@@ -80,7 +80,7 @@ export default class CarsDao {
         await this.filterById(query, 'cars.location_id', filters.location_id);
         await this.filterById(query, 'cars.category_id', filters.category_id);
         await this.filterById(query, 'cars.brand_id', filters.brand_id);
-        await this.filterById(query, 'cars.model_d', filters.model_id);
+        await this.filterById(query, 'cars.model_id', filters.model_id);
     
         return await query.orderBy(orderBy, order).offset(offset).limit(limit);
     }
