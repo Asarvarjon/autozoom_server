@@ -46,6 +46,8 @@ export default class ModelsController {
 
             const data = await this.modelsService.getAll(keyword, filters, sorts);
 
+            console.log(data)
+
             res.status(200).json({
                 success: true,
                 data

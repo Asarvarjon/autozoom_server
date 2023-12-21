@@ -23,19 +23,27 @@ export default class ModelsDao {
     }
 
     async getAll(keyword: string = '', filters: any, sorts: any) {
+    
         console.log(filters);
         const { limit, offset, order, orderBy } = sorts;
-        return await KnexService('models')
+        const query = KnexService('models')
             .select([
                 'models.*',
-                "brands.id as brand.id",
-                "brands.title as brand_title",
+                'brands.id as brand.id',
+                'brands.title as brand_title',
             ])
-            .leftJoin('brands', 'models.brand_id', 'brands.id') 
-            .groupBy('models.id','brands.id')
-            .where(filters)
-            
-            .orderBy(orderBy, order) 
+            .leftJoin('brands', 'models.brand_id', 'brands.id')
+            .groupBy('models.id', 'brands.id');
+
+            if (filters.brand_id) {
+                if (Array.isArray(filters.brand_id)) { 
+                    query.whereIn('models.brand_id', filters.brand_id);
+                } else { 
+                    query.where('models.brand_id', filters.brand_id);
+                }
+            }
+        
+            return await query.orderBy(orderBy, order).offset(offset).limit(limit);
     }
 
     async getById(modelId: string) {
