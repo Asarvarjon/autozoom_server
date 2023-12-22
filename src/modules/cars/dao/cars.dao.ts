@@ -70,11 +70,13 @@ export default class CarsDao {
             .leftJoin(function () {
                 this.select([
                     'car_images.car_id',
-                    "image.src as image.src"
+                    "image.src as image.src",
+                    "image.created_at as image.created_at",
                 ])
                     .from('car_images')
                     .leftJoin({ image: "images" }, { 'car_images.image_id': 'image.id' })
                     .groupBy('car_images.id', "image.id")
+                    .orderBy('image.created_at', 'asc') 
                     .as('car_images')
             }, { 'cars.id': 'car_images.car_id' })
             .groupBy('cars.id', 'cities.id', 'locations.id', 'models.id', 'brands.id', 'categories.id');
