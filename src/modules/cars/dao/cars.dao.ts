@@ -70,13 +70,14 @@ export default class CarsDao {
             .leftJoin(function () {
                 this.select([
                     'car_images.car_id',
-                    "image.src as image.src",
-                    "image.created_at as image.created_at",
+                    'car_images.created_at',
+
+                    "image.src as image.src", 
                 ])
                     .from('car_images')
                     .leftJoin({ image: "images" }, { 'car_images.image_id': 'image.id' })
                     .groupBy('car_images.id', "image.id")
-                    .orderBy('image.created_at', 'asc') 
+                    .orderBy('car_images.created_at', 'asc') 
                     .as('car_images')
             }, { 'cars.id': 'car_images.car_id' })
             .groupBy('cars.id', 'cities.id', 'locations.id', 'models.id', 'brands.id', 'categories.id');
@@ -209,11 +210,13 @@ export default class CarsDao {
   .leftJoin(function () {
     this.select([
       'car_images.car_id',
-      "image.src as image.src"
+      "image.src as image.src",
+      'car_images.created_at',
     ])
       .from('car_images')
       .leftJoin({ image: "images" }, { 'car_images.image_id': 'image.id' })
       .groupBy('car_images.id', "image.id")
+      .orderBy('car_images.created_at', 'asc') 
       .as('car_images')
   }, { 'cars.id': 'car_images.car_id' })
   .leftJoin('categories', 'cars.category_id', 'categories.id')  // Add this line
