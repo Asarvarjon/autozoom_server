@@ -71,7 +71,7 @@ export default class CarsDao {
                 this.select([
                     'car_images.car_id',
                     'car_images.created_at',
-
+                    'car_images.is_main',
                     "image.src as image.src", 
                 ])
                     .from('car_images')
@@ -212,6 +212,7 @@ export default class CarsDao {
       'car_images.car_id',
       "image.src as image.src",
       'car_images.created_at',
+      'car_images.is_main',
     ])
       .from('car_images')
       .leftJoin({ image: "images" }, { 'car_images.image_id': 'image.id' })

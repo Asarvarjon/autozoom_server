@@ -24,7 +24,7 @@ export default class CarsRoute implements Routes{
         this.router.get(`${this.path}/category`, this.controller.getGroupedByCategory);
 
 
-        this.router.post(`${this.path}/`, protect, validate(CreateCarDTO, 'body', true), validateFiles('images'), this.controller.create);
+        this.router.post(`${this.path}/`, protect, validate(CreateCarDTO, 'body', true), validateFiles('images', 'cover'), this.controller.create);
 
         this.router.delete(`${this.path}/:id`, protect, validate(ValidateUuidDTO, 'params'), this.controller.delete);
 

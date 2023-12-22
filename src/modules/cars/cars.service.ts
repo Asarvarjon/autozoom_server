@@ -18,20 +18,24 @@ export default class Service {
                 ...data, 
         }) 
 
+        const cover = await uploadFile(files['cover'], "images")
+
+        const coverCreated = await this.imagesDao.create({...cover[0]})
+
+        await this.createBlogImage({car_id: car.id, image_id: coverCreated.id, is_main: true})
+
+
         const images = await uploadFile(files['images'], "images")
         for (const i of images) {
             const image = await this.imagesDao.create(i) 
-            await this.createBlogImage(car.id, image.id)
+            await this.createBlogImage({car_id: car.id, image_id: image.id})
         }
 
         return car
     }
 
-    async createBlogImage(car_id, image_id) {  
-        const created = await this.dao.createBlogImage({
-                car_id,
-                image_id,
-        }) 
+    async createBlogImage(data) {  
+        const created = await this.dao.createBlogImage(data) 
 
         return created
     }
