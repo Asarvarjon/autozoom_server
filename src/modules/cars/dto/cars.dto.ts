@@ -1,5 +1,5 @@
 import { ICreateCar } from './../interface/cars.interface';
-import { IsNotEmpty, IsString, IsUUID,   IsOptional } from 'class-validator';
+import { IsNotEmpty, IsString, IsUUID,   IsOptional, IsBooleanString } from 'class-validator';
  
 
 export class CreateCarDTO implements ICreateCar {
@@ -86,6 +86,9 @@ export class CreateCarDTO implements ICreateCar {
     @IsNotEmpty()
     @IsUUID()
     category_id: string;
+
+    @IsBooleanString()
+    inclusive: boolean;
 }
 
 export class UpdateCarDTO implements ICreateCar {
@@ -97,6 +100,9 @@ export class UpdateCarDTO implements ICreateCar {
 
     @IsUUID()
     city_id: string;
+
+    @IsBooleanString()
+    inclusive: boolean;
 
     @IsString()
     price_in_aed_sale: string;

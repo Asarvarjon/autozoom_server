@@ -21,11 +21,13 @@ export interface ICar {
     price_in_usd_sale: string;
     category_id: string; 
     location_id: string;
+    inclusive: boolean;
     created_at: string; // Assuming created_at is a timestamp represented as a string
 }
 
 export interface ICreateCar { 
     brand_id: string;
+    inclusive: boolean;
     model_id: string;
     category_id: string;
     city_id: string;
