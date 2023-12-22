@@ -88,6 +88,13 @@ export default class CarsDao {
         await this.filterById(query, 'cars.brand_id', filters.brand_id);
         await this.filterById(query, 'cars.model_id', filters.model_id);
 
+        if (keyword) {
+            query.andWhere(function() {
+                this.where('models.name', 'ilike', `%${keyword}%`)
+                    .orWhere('brands.title', 'ilike', `%${keyword}%`);
+            });
+        }
+
        
         if (filters.three_days_price) {
             console.log(filters.three_days_price);
