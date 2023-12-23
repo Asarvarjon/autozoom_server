@@ -96,17 +96,10 @@ export default class CarsDao {
         }
 
        
-        if (filters.three_days_price) {
-            console.log(filters.three_days_price);
-        
-            if (Array.isArray(filters.three_days_price)) {
-                // Handle array case using WHERE IN
-                await query.whereIn( await KnexService.raw('price_in_aed::numeric * 3'), filters.three_days_price);
-            } else {
-                // Handle single value case
-                await query.whereRaw('price_in_aed::numeric * 3 <= ?', [filters.three_days_price]);
-            }
+        if (filters.three_days_price !== undefined) {
+            query.whereRaw('price_in_aed * 3 <= ?', [filters.three_days_price]);
         }
+        
     
         if (filters.two_days_price) {
             await query.whereRaw('price_in_aed::numeric * 2 <= ?', [filters.two_days_price]);
