@@ -74,6 +74,9 @@ export default class CarsController {
               result.push(flat.unflatten(model))
             }
 
+            result.reverse();
+
+
             res.status(200).json({
                 success: true,
                 data: result
