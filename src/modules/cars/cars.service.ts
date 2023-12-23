@@ -40,6 +40,12 @@ export default class Service {
         return created
     }
 
+    async deleteCarMainImage(id) {  
+        const created = await this.dao.deleteCarMainImage(id) 
+
+        return created
+    }
+
     async findOne(id: string) {
         const data = await this.dao.getById(id); 
 
@@ -73,6 +79,21 @@ export default class Service {
         if(isEmpty(found)) {
             throw new ErrorResponse(404, 'not found!')
         }  
+
+        if(files && files['cover']) {
+            const cover = await uploadFile(files['cover'], "images")
+
+            await this.deleteCarMainImage(found.id)
+
+            const coverCreated = await this.imagesDao.create({...cover[0]})
+
+            let newO = await this.createBlogImage({car_id: found.id, image_id: coverCreated.id, is_main: true})
+
+            console.log(newO)
+
+        }
+
+        
         
 
         const updated = await this.dao.update(id, {...data})

@@ -261,6 +261,15 @@ export default class CarsDao {
         .delete()
     }  
 
+    async deleteCarMainImage(id: string) {
+        return await KnexService('car_images')
+        .where({
+            car_id: id,
+            is_main: true
+        })
+        .delete()
+    } 
+
     async deleteBlogImages(id: string) {
         return await KnexService('car_images')
         .where({
