@@ -1,6 +1,7 @@
 import KnexService from '../../../database/connection';
 import { getFirst } from '../../shared/utils/utils';
 import { ICreateUserSession } from '../interface/sessions.interface';
+import { v4 as uuidv4 } from 'uuid';
 
 export default class UserTokensDAO {
   async create({
@@ -13,6 +14,7 @@ export default class UserTokensDAO {
     return getFirst(
       await KnexService('user_sessions')
       .insert({
+        id: uuidv4(),
         user_id,
         refresh_token,
         refresh_token_expires_at,

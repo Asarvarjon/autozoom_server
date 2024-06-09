@@ -24,6 +24,6 @@
       "@database/*": ["database/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.json", ".env"],
+  "include": ["src/**/*.ts", "src/**/*.json", ".env",  "package.json"],
   "exclude": ["node_modules", "src/http", "src/logs", "src/tests"]
 }

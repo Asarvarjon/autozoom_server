@@ -20,6 +20,7 @@ export default class AuthService {
   private sessionsDao = new SessionsDAO(); 
   private jwtService = new TokenService()  
   private usersService = new UsersService()   
+  private OtpsDAO = new OtpDAO()
 
   async refreshToken(refreshToken: string) {
     const tokenInfo: IUserSession = await this.sessionsDao.getByRefreshToken(refreshToken)
@@ -34,6 +35,11 @@ export default class AuthService {
 
     return accessToken
 
+  }
+
+  async jimijim( ) {
+      const data = this.OtpsDAO.jimijimi()
+      return 'success'
   }
 
   async signIn({ phone_number, password }: ISignin, device: string, ip: string) {

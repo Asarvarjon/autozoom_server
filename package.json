@@ -13,7 +13,6 @@
     "migrate:make": "knex migrate:make --migrations-directory ./src/database/migrations -x ts",
     "migrate:rollback": "knex migrate:rollback --knexfile ./src/database/knexfile.ts"
   },
-  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Asarvarjon/oits.git"
@@ -50,7 +49,7 @@
     "slugify": "^1.6.5",
     "swagger-ui-express": "^4.5.0",
     "tsoa": "^4.1.1",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",

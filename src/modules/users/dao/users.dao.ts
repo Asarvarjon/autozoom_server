@@ -2,6 +2,7 @@ import { IDefaultQuery } from './../../shared/interface/query.interface';
 import { ICreateTempPassword, ICreateUser, IUpdateUser } from './../interface/users.interface';
 import KnexService from '../../../database/connection';
 import { getFirst } from '../../shared/utils/utils'; 
+import { v4 as uuidv4 } from 'uuid';
 
 
 export default class UsersDao {
@@ -10,6 +11,7 @@ export default class UsersDao {
         return getFirst(
             await KnexService('users')
             .insert({
+                user_id: uuidv4(),
                 first_name, 
                 phone_number,
                 last_name,
@@ -113,8 +115,7 @@ export default class UsersDao {
                             this.select([ 
                                 'users.user_id',
                                 'users.first_name',
-                                'users.last_name',
-                                'users.created_at',   
+                                'users.last_name',  
                                 'users.image_src',
                             ])
                             .from('users')
@@ -140,8 +141,7 @@ export default class UsersDao {
         return getFirst(
             await KnexService('users')
             .select([
-                'users.user_id', 
-                'users.created_at',   
+                'users.user_id',   
                 'users.phone_number',    
                 'users.last_name',   
                 'users.first_name',       
@@ -197,6 +197,7 @@ export default class UsersDao {
     async createTempPassword({ user_id, password }: ICreateTempPassword) {
         return await KnexService('temp_user_passwords')
         .insert({
+            id: uuidv4(),
             user_id,
             password
         })

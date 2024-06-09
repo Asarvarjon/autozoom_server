@@ -1,12 +1,16 @@
 import { ICreateLocation } from '../interface/locations.interface';
 import KnexService from '../../../database/connection';
 import { getFirst } from '../../shared/utils/utils';
+import { v4 as uuidv4 } from 'uuid';
 
 export default class LocationsDao {
     async create(data: ICreateLocation) {
         return getFirst(
             await KnexService('locations')
-                .insert(data)
+                .insert({
+                    id: uuidv4(),
+                    ...data
+                })
                 .returning('*')
         );
     }
@@ -26,8 +30,7 @@ export default class LocationsDao {
         const { limit, offset, order, orderBy } = sorts;
         return await KnexService('locations')
             .select('*')
-            .where(filters)
-            .orderBy(orderBy, order) 
+            .where(filters) 
     }
 
     async getById(modelId: string) {

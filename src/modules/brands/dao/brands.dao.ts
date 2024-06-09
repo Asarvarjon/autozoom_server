@@ -1,12 +1,16 @@
 import { ICreateBrand } from '../interface/brands.interface';
 import KnexService from '../../../database/connection';
 import { getFirst } from '../../shared/utils/utils';
+import { v4 as uuidv4 } from 'uuid';
 
 export default class BrandsDao {
     async create(data: ICreateBrand) {
         return getFirst(
             await KnexService('brands')
-                .insert(data)
+                .insert({
+                    id: uuidv4(),
+                    ...data
+                })
                 .returning('*')
         );
     }
@@ -26,8 +30,7 @@ export default class BrandsDao {
         const { limit, offset, order, orderBy } = sorts;
         return await KnexService('brands')
             .select('*')
-            .where(filters)
-            .orderBy(orderBy, order) 
+            .where(filters) 
     }
 
     async getById(brandId: string) {

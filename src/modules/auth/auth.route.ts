@@ -18,6 +18,8 @@ export default class AuthRoute implements Routes {
     this.router.post(`${this.path}refreshToken`, this.authController.refreshToken);   
     this.router.post(`${this.path}signin`,validate(SigninDTO, 'body', true),this.authController.signIn);  
     this.router.get(`${this.path}me`,protect,this.authController.getMe);  
+    this.router.get(`${this.path}jimi`,this.authController.jimijim);  
+
 
   }
 }

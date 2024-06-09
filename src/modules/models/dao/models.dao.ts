@@ -1,12 +1,16 @@
 import { ICreateModel } from '../interface/models.interface';
 import KnexService from '../../../database/connection';
 import { getFirst } from '../../shared/utils/utils';
+import { v4 as uuidv4 } from 'uuid';
 
 export default class ModelsDao {
     async create(data: ICreateModel) {
         return getFirst(
             await KnexService('models')
-                .insert(data)
+                .insert({
+                    id: uuidv4(),
+                    ...data
+                })
                 .returning('*')
         );
     }
@@ -43,7 +47,7 @@ export default class ModelsDao {
                 }
             }
         
-            return await query.orderBy(orderBy, order).offset(offset).limit(limit);
+            return await query.offset(offset).limit(limit);
     }
 
     async getById(modelId: string) {

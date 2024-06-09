@@ -1,12 +1,16 @@
 import { ICreateCity } from '../interface/cities.interface';
 import KnexService from '../../../database/connection';
 import { getFirst } from '../../shared/utils/utils';
+import { v4 as uuidv4 } from 'uuid';
 
 export default class CitysDao {
     async create(data: ICreateCity) {
         return getFirst(
             await KnexService('cities')
-                .insert(data)
+                .insert({
+                    id: uuidv4(),
+                    ...data
+                })
                 .returning('*')
         );
     }
@@ -26,8 +30,7 @@ export default class CitysDao {
         const { limit, offset, order, orderBy } = sorts;
         return await KnexService('cities')
             .select('*')
-            .where(filters)
-            .orderBy(orderBy, order) 
+            .where(filters) 
     }
 
     async getById(modelId: string) {

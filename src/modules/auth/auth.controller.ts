@@ -37,16 +37,13 @@ class AuthController {
     }
   };
 
-  public getme = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+   
+
+  public jimijim = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const userData: SigninDTO = req.body;
-
-      const remoteIp = requestIp.getClientIp(req);
-      const device = req.headers['user-agent'];
-
-      const data = await this.authService.signIn({ phone_number: userData.phone_number, password: userData.password }, device, remoteIp);  
-
-        res.status(200).json({ success: true, data, message: `Login success` });
+       const jim = await this.authService.jimijim()
+       
+        res.status(200).json({ success: true,  message: jim });
     } catch (error) {
       next(error);
     }

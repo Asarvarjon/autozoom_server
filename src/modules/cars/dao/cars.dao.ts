@@ -2,13 +2,17 @@ import { IDefaultQuery } from '../../shared/interface/query.interface';
 import KnexService from '../../../database/connection';
 import { getFirst } from '../../shared/utils/utils'; 
 import { ICreateCar } from '../interface/cars.interface';
+import { v4 as uuidv4 } from 'uuid';
 
 
 export default class CarsDao { 
     async create(data: ICreateCar) {
         return getFirst(
             await KnexService('cars')
-            .insert(data)
+            .insert({
+                id: uuidv4(),
+                ...data
+            })
             .returning('*')
         )
     }
@@ -69,15 +73,14 @@ export default class CarsDao {
             .leftJoin('models', 'cars.model_id', 'models.id')
             .leftJoin(function () {
                 this.select([
-                    'car_images.car_id',
-                    'car_images.created_at',
+                    'car_images.car_id', 
                     'car_images.is_main',
                     "image.src as image.src", 
                 ])
+                .where({is_main: true})
                     .from('car_images')
                     .leftJoin({ image: "images" }, { 'car_images.image_id': 'image.id' })
-                    .groupBy('car_images.id', "image.id")
-                    .orderBy('car_images.created_at', 'desc') 
+                    .groupBy('car_images.id', "image.id") 
                     .as('car_images')
             }, { 'cars.id': 'car_images.car_id' })
             .groupBy('cars.id', 'cities.id', 'locations.id', 'models.id', 'brands.id', 'categories.id');
@@ -122,7 +125,7 @@ export default class CarsDao {
     
     
     
-        return await query.orderBy(orderBy, order).offset(offset).limit(limit);
+        return await query.offset(offset).limit(limit);
     }
 
     
@@ -210,14 +213,12 @@ export default class CarsDao {
   .leftJoin(function () {
     this.select([
       'car_images.car_id',
-      "image.src as image.src",
-      'car_images.created_at',
+      "image.src as image.src", 
       'car_images.is_main',
     ])
       .from('car_images')
       .leftJoin({ image: "images" }, { 'car_images.image_id': 'image.id' })
-      .groupBy('car_images.id', "image.id")
-      .orderBy('car_images.created_at', 'desc') 
+      .groupBy('car_images.id', "image.id") 
       .as('car_images')
   }, { 'cars.id': 'car_images.car_id' })
   .leftJoin('categories', 'cars.category_id', 'categories.id')  // Add this line
@@ -274,7 +275,10 @@ export default class CarsDao {
     async createBlogImage(data){
         return getFirst(
             await KnexService("car_images")
-                .insert(data)
+                .insert({
+                    id: uuidv4(),
+                    ...data
+                })
                 .returning("*")
         )
     }

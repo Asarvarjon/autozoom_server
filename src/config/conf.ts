@@ -29,7 +29,7 @@ export const server = {
 };  
 
 export const Admin = {
-   phone_number: env.PHONE_NUMBER || '900474227',
+   phone_number: env.PHONE_NUMBER || '585488778',
    password: env.PASSWORD || 'superadmin'
 }; 
 

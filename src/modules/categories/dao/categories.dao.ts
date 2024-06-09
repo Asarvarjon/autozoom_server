@@ -2,13 +2,17 @@ import { ICreateCategory } from './../interface/categories.interface';
 import { IDefaultQuery } from '../../shared/interface/query.interface'; 
 import KnexService from '../../../database/connection';
 import { getFirst } from '../../shared/utils/utils'; 
+import { v4 as uuidv4 } from 'uuid';
 
 
 export default class CategoriesDao { 
     async create(data: ICreateCategory) {
         return getFirst(
             await KnexService('categories')
-            .insert(data)
+            .insert({
+                id: uuidv4(),
+                ...data
+            })
             .returning('*')
         )
     }

@@ -1,13 +1,17 @@
 import { IDefaultQuery } from '../../shared/interface/query.interface'; 
 import KnexService from '../../../database/connection';
 import { getFirst } from '../../shared/utils/utils'; 
+import { v4 as uuidv4 } from 'uuid';
 
 
 export default class NewsDao { 
     async create(data) {
         return getFirst(
             await KnexService('news')
-            .insert(data)
+            .insert({
+                id: uuidv4(),
+                    ...data
+            })
             .returning('*')
         )
     }
