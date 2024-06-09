@@ -216,6 +216,7 @@ export default class CarsDao {
       "image.src as image.src", 
       'car_images.is_main',
     ])
+    .where({is_main: true})
       .from('car_images')
       .leftJoin({ image: "images" }, { 'car_images.image_id': 'image.id' })
       .groupBy('car_images.id', "image.id") 
