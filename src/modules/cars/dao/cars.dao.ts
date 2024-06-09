@@ -224,7 +224,8 @@ export default class CarsDao {
   }, { 'cars.id': 'car_images.car_id' })
   .leftJoin('categories', 'cars.category_id', 'categories.id')  // Add this line
   .groupBy('cars.id', 'cities.id', 'locations.id', 'models.id', 'brands.id', 'categories.id')  // Update this line
-  .where('cars.category_id', category_id);
+  .where('cars.category_id', category_id)
+  .orderBy('created_at', 'desc')
       
             const categoryData = {
               id: category_id,
