@@ -190,7 +190,7 @@ export default class CarsDao {
             ])
             .leftJoin('cars', 'categories.id', 'cars.category_id')
             .groupBy('categories.id')
-            .orderBy('categories.id');
+            // .orderBy('categories.id');
       
           const result = await Promise.all(groupedData.map(async (category) => {
             const { category_id, category_name_en, category_name_ru, ...restCategoryData } = category;
@@ -225,7 +225,7 @@ export default class CarsDao {
   .leftJoin('categories', 'cars.category_id', 'categories.id')  // Add this line
   .groupBy('cars.id', 'cities.id', 'locations.id', 'models.id', 'brands.id', 'categories.id')  // Update this line
   .where('cars.category_id', category_id)
-  .orderBy('created_at', 'desc')
+  .orderBy('created_at', 'asc')
       
             const categoryData = {
               id: category_id,
