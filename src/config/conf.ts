@@ -9,7 +9,7 @@ export const pg = {
   port: env.PG_PORT || 5432,
   user: env.PG_USER || 'postgres',
   password: env.PG_PASSWORD || 'pgpwd',
-  database: env.PG_DB_NAME || 'autozoom',
+  database: env.PG_DB_NAME || 'jbs_db',
   migrationsTable: env.PG_MIGRATIONS_TABLE || 'migrations',
   maxPool: 75,
   minPool: 2,
