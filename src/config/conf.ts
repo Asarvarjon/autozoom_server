@@ -7,9 +7,9 @@ const { env } = process;
 export const pg = {
   host: env.PG_HOST || 'localhost',
   port: env.PG_PORT || 5432,
-  user: env.PG_USER || 'postgres',
+  user: env.PG_USER || 'caruser',
   password: env.PG_PASSWORD || 'pgpwd',
-  database: env.PG_DB_NAME || 'jbs_db',
+  database: env.PG_DB_NAME || 'car_db',
   migrationsTable: env.PG_MIGRATIONS_TABLE || 'migrations',
   maxPool: 75,
   minPool: 2,
@@ -29,7 +29,7 @@ export const server = {
 };  
 
 export const Admin = {
-   phone_number: env.PHONE_NUMBER || '585488778',
+   phone_number: env.PHONE_NUMBER || '991234567',
    password: env.PASSWORD || 'superadmin'
 }; 
 
